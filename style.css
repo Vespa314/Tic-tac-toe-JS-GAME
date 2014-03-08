@@ -2,7 +2,7 @@
 
 body{
 background: #FFF;
-margin: auto;
+margin:auto;
 width:600px;
 }
 
@@ -14,11 +14,11 @@ div.option{
 color: #F00;
 }
 
-div.gameboard{
+div#gameboard{
 width: 160px;
 }
 
-div.gameboard div{
+div#gameboard div{
 float: left;
 width:50px;
 height:50px;
@@ -27,9 +27,18 @@ border: solid 1px #000;
 
 .playerlabel{
 font-family: Gloria Hallelujah;
-font-size: 90px;
+font-size: 78px;
 position: relative;
-top: -79px;
-left: 2px;
+top: -63px;
+left: 5px;
 border: 0px solid !important;
+}
+
+.timeleft{
+border:none !important;
+position: relative;
+top: -18px;
+left: 0px;
+color: #F00;
+font-size: 17px;
 }
