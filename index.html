@@ -7,13 +7,7 @@
 	<script type="text/javascript" src="js.js"></script>
 </head>
 <body>
-	<div class="radio">
-		<input type="radio" name="radio" value="cp_defensive " checked="checked" />
-		电脑后手
-		<input type="radio" name="radio" value="cp_offensive " />
-		电脑先手
-	</div>
-	<div id="gameboard">
+	<div id="gameboard" style="display:none">
 		<div id="grid11">
 			<div class="playerlabel"></div>
 			<div class="timeleft"></div>
@@ -51,6 +45,16 @@
 			<div class="timeleft"></div>
 		</div>
 	</div>
+	<button id="startGame" onclick="StartGame()">开始游戏</button>
+	<form>
+	<div class="radio">
+		<label for="defensive">电脑后手</label>
+		<input type="radio" name="radio" value="cp_defensive" checked="checked" id="defensive" />
+		</br>
+		<label for="offensive">电脑先手</label>
+		<input type="radio" name="radio" value="cp_offensive" id="offensive" />
+	</div>
+</form>
 	<div class="copyright"></div>
 </body>
 </html>
