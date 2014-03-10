@@ -42,3 +42,8 @@ left: 0px;
 color: #F00;
 font-size: 17px;
 }
+
+#copyright{
+	font-size: 12px;
+	float:right;
+}

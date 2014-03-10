@@ -9,6 +9,7 @@
  var GameStartFlag = 0;
  var PlayerFirst = 1;
  var HasWinner = 0;
+ var ClickLock = 0;
  var HighLightType = {
  	p1x: -1,
  	p1y: -1,
@@ -28,6 +29,7 @@
  			TimeLeft[i][j] = 0;
  		};
  	};
+ 	ClickLock = 0;
  }
 
  function IsPlayerFirst() {
@@ -56,6 +58,8 @@
 
  function MouseClick(event) {
  	if (!GameStartFlag) return;
+ 	if (ClickLock) return;
+
  	var e = event || window.event;
  	var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
  	var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
@@ -63,8 +67,10 @@
  	var x = (e.pageX || e.clientX + scrollX - offsetX) - div.offsetLeft;
  	var y = (e.pageY || e.clientY + scrollY - offsetY) - div.offsetTop;
  	var result = SetGame(Math.floor(y / 50), Math.floor(x / 50), boardState, TimeLeft, PlayerColor);
+ 	DrawGame();
  	if (result == -1) {
- 		AIMove();
+ 		ClickLock = 1;
+ 		setTimeout('AIMove()',800);
  	} else if (result == AIColor) {
  		document.getElementById("cp_dilg").innerHTML = "哇咔咔，我赢了！！";
  		GameStartFlag = 0;
@@ -74,7 +80,6 @@
  		GameStartFlag = 0;
  		HasWinner = 1;
  	}
- 	DrawGame();
  }
 
  function SetGame(x, y, mboardState, mTimeLeft, IsPlayerMove) {
@@ -196,7 +201,7 @@
  					y: j
  				};
  			} else {
- 				var score = MinMax(boardState_t, TimeLeft_t, 0, IsPlayerFirst() ? 5 : 11);
+ 				var score = MinMax(boardState_t, TimeLeft_t, 0, IsPlayerFirst() ? 3 : 10);
  				if (score >= MaxScore) {
  					bestmove = {
  						x: i,
@@ -215,6 +220,8 @@
  		HasWinner = 1;
  		GameStartFlag = 0;
  	}
+ 	DrawGame();
+ 	ClickLock = 0;
  }
 
  function MinMax(mboardState, mTimeLeft, AITurn, Depth) {
@@ -238,6 +245,8 @@
  			} else if (!AITurn && temp_score < curscore) {
  				curscore = temp_score;
  			}
+ 			if(AITurn && curscore == 1)	return 1;
+ 			else if(!AITurn && curscore == -1) return -1;
  		}
  	}
  	return curscore;
