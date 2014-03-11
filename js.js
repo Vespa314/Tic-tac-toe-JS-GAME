@@ -75,6 +75,7 @@
  		document.getElementById("cp_dilg").innerHTML = "你。。。居然赢了我。。这不科学！！";
  		GameStartFlag = 0;
  		HasWinner = 1;
+ 		DrawGame();
  	}
  }
 
