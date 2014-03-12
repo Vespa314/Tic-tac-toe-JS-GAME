@@ -198,7 +198,7 @@
  					y: j
  				};
  			} else {
- 				var score = MinMax(boardState_t, TimeLeft_t, 0, IsPlayerFirst() ? 3 : 10);
+ 				var score = MinMax(boardState_t, TimeLeft_t, 0, IsPlayerFirst() ? 10 : 10);
  				if (score >= MaxScore) {
  					bestmove = {
  						x: i,
