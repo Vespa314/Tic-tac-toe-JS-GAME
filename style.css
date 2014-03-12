@@ -28,6 +28,7 @@ font-family: cursive;
 font-size: 42px;
 position: relative;
 padding-left: 10px;
+padding-top: 11px;
 border: 0px solid !important;
 }
 
@@ -35,7 +36,7 @@ border: 0px solid !important;
 .timeleft{
 border:none !important;
 position: relative;
-top: -18px;
+top: -32px;
 left: 0px;
 color: #F00;
 font-size: 17px;

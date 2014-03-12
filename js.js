@@ -1,4 +1,4 @@
- window.onload = init;
+﻿ //window.onload = init;
  var gridSize = 50;
  var boardState = new Array();
  var TimeLeft = new Array();
@@ -18,6 +18,7 @@
  	p3x: -1,
  	p3y: -1,
  };
+ init();
  function init() {
  	for (var i = 0; i < 3; i++) {
  		boardState[i] = new Array();
@@ -62,6 +63,13 @@
 	y = parseInt(gridId.charAt(4))-1;
 	x = parseInt(gridId.charAt(5))-1;
 
+ 	// var e = event || window.event;
+ 	// var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+ 	// var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+ 	// var div = document.getElementById("gameboard");
+ 	// var x = (e.pageX || e.clientX + scrollX - offsetX) - div.offsetLeft/* -245*/;
+ 	// var y = (e.pageY || e.clientY + scrollY - offsetY) - div.offsetTop/* -405*/;
+ 	// var result = SetGame(Math.floor(y / 50), Math.floor(x / 50), boardState, TimeLeft, PlayerColor);
  	var result = SetGame(y, x, boardState, TimeLeft, PlayerColor);
  	DrawGame();
  	if (result == -1) {
@@ -75,7 +83,7 @@
  		document.getElementById("cp_dilg").innerHTML = "你。。。居然赢了我。。这不科学！！";
  		GameStartFlag = 0;
  		HasWinner = 1;
- 		DrawGame();
+		DrawGame();
  	}
  }
 

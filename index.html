@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="./style.css" type="text/css" />
 	<script type="text/javascript" src="js.js"></script>
 </head>
-	<div id="game">
+	<div id="game" style="border-top: 3px solid #F00;border-bottom: 3px solid #F00;border-radius: 5px;">
 		<div id="gameboard" >
 			<div id="grid11">
 				<div class="playerlabel" style="color:#000"></div>
@@ -48,14 +48,11 @@
 		<button id="startGame" onclick="StartGame()">开始游戏</button>
 		<form>
 			<div class="radio">
-				<label for="defensive">电脑后手</label>
-				<input type="radio" name="radio" value="cp_defensive" checked="checked" id="defensive" />
-				<label for="offensive">电脑先手</label>
-				<input type="radio" name="radio" value="cp_offensive" id="offensive" />
+				<input type="radio" name="radio" value="cp_defensive" checked="checked" id="defensive" /><label for="defensive">电脑后手</label>
+				<input type="radio" name="radio" value="cp_offensive" id="offensive" /><label for="offensive">电脑先手</label>
 			</div>
 		</form>
 		<div style="clear:both"></div>
 		<div id="cp_dilg">先点击“开始游戏”</div>
-		<div id="copyright" >版权归<a href="http://www.kylen314.com">比特之理</a>所有</div>
 	</div>
 </html>
