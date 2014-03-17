@@ -18,6 +18,7 @@
  	p3x: -1,
  	p3y: -1,
  };
+
  function init() {
  	for (var i = 0; i < 3; i++) {
  		boardState[i] = new Array();
@@ -25,7 +26,7 @@
  		for (var j = 0; j < 3; j++) {
  			boardState[i][j] = EMPTY;
  			TimeLeft[i][j] = 0;
- 		    document.getElementById("grid"+(i+1)+(j+1)).onclick = MouseClick;
+ 			document.getElementById("grid" + (i + 1) + (j + 1)).onclick = MouseClick;
  		};
  	};
  	ClickLock = 0;
@@ -58,15 +59,15 @@
  function MouseClick(event) {
  	if (!GameStartFlag) return;
  	if (ClickLock) return;
-	gridId = this.id;
-	y = parseInt(gridId.charAt(4))-1;
-	x = parseInt(gridId.charAt(5))-1;
+ 	gridId = this.id;
+ 	y = parseInt(gridId.charAt(4)) - 1;
+ 	x = parseInt(gridId.charAt(5)) - 1;
 
  	var result = SetGame(y, x, boardState, TimeLeft, PlayerColor);
  	DrawGame();
  	if (result == -1) {
  		ClickLock = 1;
- 		setTimeout('AIMove()',800);
+ 		setTimeout('AIMove()', 800);
  	} else if (result == AIColor) {
  		document.getElementById("cp_dilg").innerHTML = "哇咔咔，我赢了！！";
  		GameStartFlag = 0;
@@ -97,7 +98,7 @@
  	for (var i = 0; i < 3; i++) {
  		for (var j = 0; j < 3; j++) {
  			var grid = document.getElementById("grid" + (i + 1) + (j + 1)).getElementsByTagName("div");
- 			grid[0].style.color="#000";
+ 			grid[0].style.color = "#000";
  			if (boardState[i][j] == PlayerColor) grid[0].innerHTML = "X";
  			else if (boardState[i][j] == AIColor) grid[0].innerHTML = "O";
  			else {
@@ -111,11 +112,11 @@
  	}
  	if (HasWinner) {
  		grid = document.getElementById("grid" + (HighLightType.p1x + 1) + (HighLightType.p1y + 1)).getElementsByTagName("div");
- 		grid[0].style.color="#F00";
+ 		grid[0].style.color = "#F00";
  		grid = document.getElementById("grid" + (HighLightType.p2x + 1) + (HighLightType.p2y + 1)).getElementsByTagName("div");
- 		grid[0].style.color="#F00";
+ 		grid[0].style.color = "#F00";
  		grid = document.getElementById("grid" + (HighLightType.p3x + 1) + (HighLightType.p3y + 1)).getElementsByTagName("div");
- 		grid[0].style.color="#F00";
+ 		grid[0].style.color = "#F00";
  	};
  }
 
@@ -179,35 +180,41 @@
 
  function AIMove() {
  	var MaxScore = -999999;
- 	var bestmove = {
- 		x: -1,
- 		y: -1
- 	};
- 	for (var i = 0; i < 3; i++) {
- 		for (var j = 0; j < 3; j++) {
- 			if (boardState[i][j] != EMPTY)
- 				continue;
- 			var boardState_t = Array2DClone(boardState);
- 			var TimeLeft_t = Array2DClone(TimeLeft);
+ 	var bestmove;
+ 	IterDepth = 10;
+ 	while (MaxScore < 0 && IterDepth > 2) {
+ 		var MaxScore = -999999;
+ 		bestmove = {
+ 			x: -1,
+ 			y: -1
+ 		};
+ 		for (var i = 0; i < 3; i++) {
+ 			for (var j = 0; j < 3; j++) {
+ 				if (boardState[i][j] != EMPTY)
+ 					continue;
+ 				var boardState_t = Array2DClone(boardState);
+ 				var TimeLeft_t = Array2DClone(TimeLeft);
 
- 			var result = SetGame(i, j, boardState_t, TimeLeft_t, AIColor);
- 			if (result == AIColor) {
- 				MaxScore = 999999;
- 				bestmove = {
- 					x: i,
- 					y: j
- 				};
- 			} else {
- 				var score = MinMax(boardState_t, TimeLeft_t, 0, IsPlayerFirst() ? 10 : 10);
- 				if (score >= MaxScore) {
+ 				var result = SetGame(i, j, boardState_t, TimeLeft_t, AIColor);
+ 				if (result == AIColor) {
+ 					MaxScore = 999999;
  					bestmove = {
  						x: i,
  						y: j
  					};
- 					MaxScore = score;
- 				};
+ 				} else {
+ 					var score = MinMax(boardState_t, TimeLeft_t, 0, IsPlayerFirst() ? IterDepth : IterDepth);
+ 					if (score >= MaxScore) {
+ 						bestmove = {
+ 							x: i,
+ 							y: j
+ 						};
+ 						MaxScore = score;
+ 					};
+ 				}
  			}
  		}
+ 		IterDepth--;
  	}
  	if (MaxScore == 1) {
  		document.getElementById("cp_dilg").innerHTML = "我已经看到结局了！！";
@@ -242,8 +249,8 @@
  			} else if (!AITurn && temp_score < curscore) {
  				curscore = temp_score;
  			}
- 			if(AITurn && curscore == 1)	return 1;
- 			else if(!AITurn && curscore == -1) return -1;
+ 			if (AITurn && curscore == 1) return 1;
+ 			else if (!AITurn && curscore == -1) return -1;
  		}
  	}
  	return curscore;
